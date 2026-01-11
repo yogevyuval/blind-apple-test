@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>🍎 Blind Apple Tasting Results 🍏</title>
+    <style>
+        :root{
+            --gray-50:#f9fafb; --gray-100:#f3f4f6; --gray-200:#e5e7eb; --gray-400:#9ca3af;
+            --gray-500:#6b7280; --gray-600:#4b5563; --gray-700:#374151; --gray-800:#1f2937;
+            --blue-100:#dbeafe; --blue-800:#1e40af;
+            --amber-50:#fffbeb; --amber-100:#fef3c7; --amber-400:#fbbf24; --amber-600:#d97706; --amber-800:#92400e;
+            --yellow-50:#fefce8; --yellow-100:#fef9c3; --yellow-400:#facc15; --yellow-500:#eab308;
+            --red-50:#fef2f2; --red-300:#fca5a5; --red-500:#ef4444; --red-600:#dc2626; --red-700:#b91c1c;
+            --rose-50:#fff1f2; --rose-300:#fda4af; --rose-500:#f43f5e; --rose-600:#e11d48;
+            --orange-50:#fff7ed; --orange-300:#fdba74; --orange-500:#f97316; --orange-600:#ea580c;
+            --emerald-50:#ecfdf5; --emerald-300:#6ee7b7; --emerald-500:#10b981; --emerald-600:#059669; --emerald-700:#047857;
+            --pink-50:#fdf2f8; --pink-300:#f9a8d4; --pink-500:#ec4899; --pink-600:#db2777;
+            --purple-50:#faf5ff; --purple-300:#d8b4fe; --purple-500:#a855f7; --purple-600:#9333ea;
+            --teal-500:#14b8a6;
+            --green-500:#22c55e; --green-600:#16a34a; --green-700:#15803d;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
+            --shadow-md: 0 4px 10px rgba(0,0,0,.10);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,.12);
+            --radius-lg: 14px;
+            --radius-xl: 18px;
+            --radius-2xl: 22px;
+            --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: var(--font);
+            color: var(--gray-800);
+            background: linear-gradient(135deg, var(--red-50), var(--amber-50), var(--emerald-50));
+            min-height: 100vh;
+        }
+
+        a { color: inherit; }
+        .container { max-width: 1024px; margin: 0 auto; padding: 16px; }
+        @media (min-width: 768px) { .container { padding: 24px; } }
+
+        /* Layout helpers */
+        .text-center { text-align: center; }
+        .mx-auto { margin-left:auto; margin-right:auto; }
+        .mb-1{ margin-bottom: 4px; } .mb-2{ margin-bottom: 8px; } .mb-3{ margin-bottom: 12px; } .mb-4{ margin-bottom: 16px; } .mb-6{ margin-bottom: 24px; }
+        .mt-1{ margin-top: 4px; } .mt-2{ margin-top: 8px; } .mt-3{ margin-top: 12px; } .mt-4{ margin-top: 16px; }
+        .p-1{ padding: 4px; } .p-2{ padding: 8px; } .p-3{ padding: 12px; } .p-4{ padding: 16px; } .p-6{ padding: 24px; }
+        .px-2{ padding-left: 8px; padding-right: 8px; }
+        .px-3{ padding-left: 12px; padding-right: 12px; }
+        .px-4{ padding-left: 16px; padding-right: 16px; }
+        .py-1{ padding-top: 4px; padding-bottom: 4px; }
+        .py-2{ padding-top: 8px; padding-bottom: 8px; }
+        .py-3{ padding-top: 12px; padding-bottom: 12px; }
+        .pt-2{ padding-top: 8px; } .pb-4{ padding-bottom: 16px; }
+        .gap-2{ gap: 8px; } .gap-3{ gap: 12px; } .gap-4{ gap: 16px; }
+        .space-y-1 > * + * { margin-top: 4px; }
+        .space-y-2 > * + * { margin-top: 8px; }
+        .space-y-3 > * + * { margin-top: 12px; }
+
+        .rounded-lg { border-radius: 12px; }
+        .rounded-xl { border-radius: var(--radius-xl); }
+        .rounded-2xl { border-radius: var(--radius-2xl); }
+        .shadow-md { box-shadow: var(--shadow-md); }
+        .shadow-lg { box-shadow: var(--shadow-lg); }
+        .border { border: 1px solid var(--gray-200); }
+        .border-2 { border-width: 2px; border-style: solid; }
+        .border-t { border-top-width: 1px; border-top-style: solid; }
+
+        .inline-block { display:inline-block; }
+        .flex { display:flex; }
+        .items-center{ align-items:center; }
+        .justify-between{ justify-content:space-between; }
+        .justify-center{ justify-content:center; }
+        .flex-1{ flex:1; }
+        .flex-wrap{ flex-wrap:wrap; }
+        .min-w-0{ min-width:0; }
+
+        .grid { display:grid; }
+        .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .overflow-hidden { overflow:hidden; }
+        .overflow-x-auto { overflow-x:auto; }
+
+        @media (min-width: 768px){
+            .md\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .md\\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .md\\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .md\\:p-6 { padding: 24px; }
+            .md\\:text-4xl { font-size: 36px; line-height: 1.1; }
+            .md\\:text-2xl { font-size: 24px; }
+            .md\\:text-xl { font-size: 20px; }
+            .md\\:text-6xl { font-size: 60px; }
+            .md\\:text-3xl { font-size: 30px; }
+            .md\\:col-span-2 { grid-column: span 2 / span 2; }
+        }
+
+        /* Typography */
+        .text-xs{ font-size: 12px; }
+        .text-sm{ font-size: 14px; }
+        .text-lg{ font-size: 18px; }
+        .text-xl{ font-size: 20px; }
+        .text-2xl{ font-size: 24px; }
+        .text-3xl{ font-size: 30px; }
+        .text-4xl{ font-size: 36px; }
+        .text-5xl{ font-size: 48px; }
+        .text-6xl{ font-size: 60px; }
+
+        .font-bold{ font-weight: 700; }
+        .font-semibold{ font-weight: 600; }
+        .font-medium{ font-weight: 500; }
+        .font-mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+        .italic{ font-style: italic; }
+        .uppercase{ text-transform: uppercase; }
+        .tracking-wide{ letter-spacing: 0.06em; }
+
+        .text-gray-400{ color: var(--gray-400); }
+        .text-gray-500{ color: var(--gray-500); }
+        .text-gray-600{ color: var(--gray-600); }
+        .text-gray-700{ color: var(--gray-700); }
+        .text-gray-800{ color: var(--gray-800); }
+
+        /* Pills / badges */
+        .pill { display:inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; line-height: 1.4; }
+        .pill.gray { background: var(--gray-200); color: var(--gray-700); }
+        .pill.blue { background: var(--blue-100); color: var(--blue-800); }
+        .pill.white { background: white; color: white; } /* unused */
+
+        /* Tables */
+        table { border-collapse: collapse; }
+        th, td { vertical-align: middle; }
+        .border-b { border-bottom: 1px solid var(--gray-100); }
+        .border-b-2 { border-bottom: 2px solid var(--gray-200); }
+
+        /* Buttons / interactive rows */
+        .row {
+            cursor: pointer;
+            transition: transform .08s ease, box-shadow .18s ease;
+        }
+        .row:hover { box-shadow: var(--shadow-md); }
+        .bar-track { background: var(--gray-200); border-radius: 999px; height: 12px; overflow: hidden; }
+        .bar { height: 12px; border-radius: 999px; width: 0; transition: width .25s ease; }
+
+        /* Winner banner */
+        .winner-shell {
+            background: linear-gradient(90deg, var(--yellow-400), var(--amber-400), var(--yellow-400));
+            padding: 4px;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Insight banner */
+        .insights {
+            background: linear-gradient(90deg, var(--emerald-500), var(--teal-500));
+            color: white;
+        }
+        .glass { background: rgba(255,255,255,.20); border-radius: var(--radius-xl); }
+
+        /* Market share bars */
+        .market-track { background: var(--gray-200); height: 16px; border-radius: 999px; overflow:hidden; }
+        .market-bar { height: 16px; border-radius: 999px; }
+
+        /* Rating colors */
+        .rate-90 { background: var(--green-500); color: white; }
+        .rate-80 { background: var(--emerald-500); color: white; }
+        .rate-70 { background: var(--yellow-500); color: white; }
+        .rate-60 { background: var(--orange-500); color: white; }
+        .rate-0  { background: var(--red-500); color: white; }
+
+        /* Apple theme classes (bg/border/bar) */
+        .a-Pazzaz { --bg: var(--rose-50); --border: var(--rose-300); --bar: var(--rose-500); }
+        .a-Honeycrisp { --bg: var(--amber-50); --border: var(--amber-400); --bar: var(--amber-600); }
+        .a-Sugarbee { --bg: var(--yellow-50); --border: var(--yellow-400); --bar: var(--yellow-500); }
+        .a-Cosmic\\ Crisp { --bg: var(--purple-50); --border: var(--purple-300); --bar: var(--purple-500); }
+        .a-Fuji { --bg: var(--red-50); --border: var(--red-300); --bar: var(--red-500); }
+        .a-Gala { --bg: var(--orange-50); --border: var(--orange-300); --bar: var(--orange-500); }
+        .a-Envy { --bg: var(--emerald-50); --border: var(--emerald-300); --bar: var(--emerald-500); }
+        .a-Honeycrisp\\ OG { --bg: var(--pink-50); --border: var(--pink-300); --bar: var(--pink-500); }
+
+        .apple-card {
+            background: var(--bg);
+            border-color: var(--border);
+        }
+        .apple-card .bar { background: var(--bar); }
+
+        /* Utility-ish */
+        .bg-white { background: white; }
+        .bg-gray-100 { background: var(--gray-100); }
+        .bg-amber-50 { background: var(--amber-50); }
+        .w-full { width: 100%; }
+        .w-10 { width: 40px; }
+        .w-12 { width: 48px; }
+        .w-14 { width: 56px; }
+        .w-28 { width: 112px; }
+        .h-3 { height: 12px; }
+        .h-4 { height: 16px; }
+        .min-w-500 { min-width: 500px; }
+
+        .text-white { color:white; }
+
+        /* Small helper for long names in CSS class */
+        .nowrap { white-space: nowrap; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="app"></div>
+</div>
+
+<script>
+    // -----------------------------
+    // Data (from your JSX)
+    // -----------------------------
+    const appleFacts = {
+        'Pazzaz': {
+            origin: 'Wisconsin, USA',
+            year: '2000s',
+            parents: 'Honeycrisp descendant (bee cross-pollinated)',
+            knownFor: 'Sweet-tart "zingy" flavor that peaks in January-February. Named for its exciting taste with multiple Z\'s for "high energy."',
+            funFact: 'Created naturally by bees in Eau Claire, Wisconsin. Reaches peak flavor months after harvest as starches convert to sugars.',
+            industryRating: 60,
+            industryTier: 'Barely Worth It',
+            industryNickname: 'The Desperate Musical Theater Major',
+            marketShare: null
+        },
+        'Honeycrisp': {
+            origin: 'Minnesota, USA',
+            year: '1991',
+            parents: 'Keepsake × MN1627',
+            knownFor: 'Revolutionary "explosively crisp" texture that changed the apple industry. Minnesota\'s state fruit.',
+            funFact: 'Almost thrown away! Rescued from the discard pile in 1982 by researcher David Bedford, who gave it one more chance.',
+            industryRating: 95,
+            industryTier: 'Nearly Perfect',
+            industryNickname: 'The Worldwide Favorite',
+            marketShare: '9.8%'
+        },
+        'Sugarbee': {
+            origin: 'Minnesota, USA',
+            year: '2016',
+            parents: 'Honeycrisp × unknown variety',
+            knownFor: 'Exceptionally sweet with notes of honey, caramel, and molasses. One of the crunchiest apples available.',
+            funFact: 'Discovered by Chuck Nystrom in 1994 and named to honor the bee that cross-pollinated the Honeycrisp tree.',
+            industryRating: 80,
+            industryTier: 'Excellent',
+            industryNickname: 'The Honey Grenade',
+            marketShare: null
+        },
+        'Cosmic Crisp': {
+            origin: 'Washington State, USA',
+            year: '2019',
+            parents: 'Honeycrisp × Enterprise',
+            knownFor: 'Perfectly balanced sweet-tart flavor, slow to brown, stores for 10+ months. Exclusive to Washington State.',
+            funFact: 'Named for its star-like lenticels (dots) that look like a galaxy. Had a $10 million marketing campaign—the largest in apple history!',
+            industryRating: 81,
+            industryTier: 'Excellent',
+            industryNickname: 'The Hype Machine',
+            marketShare: '6%'
+        },
+        'Fuji': {
+            origin: 'Fujisaki, Japan',
+            year: '1962',
+            parents: 'Red Delicious × Ralls Janet',
+            knownFor: 'The sweetest apple variety (15-18 Brix). Dense, firm flesh with incredible storage life.',
+            funFact: 'Created from two American parent apples by Japanese researchers. Now dominates nearly 70% of China\'s 43 million tons produced annually.',
+            industryRating: 56,
+            industryTier: 'Barely Worth It',
+            industryNickname: 'The Japanese Pop Star',
+            marketShare: '9.4%'
+        },
+        'Gala': {
+            origin: 'New Zealand',
+            year: '1965',
+            parents: 'Golden Delicious × Kidd\'s Orange Red',
+            knownFor: 'Mild, sweet flavor with vanilla-like notes. Now the #1 produced apple in the United States.',
+            funFact: 'The "Royal" Gala strain was named after Queen Elizabeth II praised the apple during a visit to New Zealand!',
+            industryRating: 70,
+            industryTier: 'Pretty Good',
+            industryNickname: 'The Inoffensive Mainstay',
+            marketShare: '17%'
+        },
+        'Envy': {
+            origin: 'Hawke\'s Bay, New Zealand',
+            year: '2009',
+            parents: 'Royal Gala × Braeburn',
+            knownFor: 'Sweet with floral notes, extremely slow to brown (up to 10 hours after cutting).',
+            funFact: 'Took over 25 years of testing before commercial release. Sibling to the Jazz apple (same parents).',
+            industryRating: 86,
+            industryTier: 'Excellent',
+            industryNickname: 'The Guilty Pleasure',
+            marketShare: null
+        },
+        'Honeycrisp OG': {
+            origin: 'Minnesota, USA',
+            year: '1991',
+            parents: 'Keepsake × MN1627',
+            knownFor: 'Organic Honeycrisp — same legendary variety, grown without synthetic pesticides or fertilizers.',
+            funFact: 'Organic apples often have more antioxidants. The "OG" stands for Organic, your control sample to compare against conventional apples.',
+            industryRating: 95,
+            industryTier: 'Nearly Perfect',
+            industryNickname: 'The Worldwide Favorite (Organic)',
+            marketShare: '9.8%'
+        }
+    };
+
+    // Normalized data (z-score normalized per grader, rescaled)
+    const normalizedData = [
+        { grader: 'Adam', apple: 'Pazzaz', letter: 'A', flavor: 3.69, crunch: 3.19, aroma: 3.19, juiciness: 4.18, overall: 3.56 },
+        { grader: 'Adam', apple: 'Honeycrisp', letter: 'B', flavor: 2.70, crunch: 2.70, aroma: 3.19, juiciness: 3.19, overall: 2.91 },
+        { grader: 'Adam', apple: 'Sugarbee', letter: 'C', flavor: 3.19, crunch: 4.68, aroma: 3.19, juiciness: 3.19, overall: 3.52 },
+        { grader: 'Adam', apple: 'Cosmic Crisp', letter: 'D', flavor: 3.69, crunch: 3.69, aroma: 2.70, juiciness: 4.18, overall: 3.59 },
+        { grader: 'Adam', apple: 'Fuji', letter: 'E', flavor: 3.19, crunch: 2.70, aroma: 3.69, juiciness: 3.69, overall: 3.28 },
+        { grader: 'Adam', apple: 'Gala', letter: 'F', flavor: 1.00, crunch: 1.21, aroma: 2.70, juiciness: 2.21, overall: 1.67 },
+        { grader: 'Adam', apple: 'Envy', letter: 'G', flavor: 1.72, crunch: 1.00, aroma: 1.72, juiciness: 1.72, overall: 1.55 },
+        { grader: 'Adam', apple: 'Honeycrisp OG', letter: 'H', flavor: 3.69, crunch: 3.69, aroma: 4.18, juiciness: 4.18, overall: 3.91 },
+        { grader: 'Yuval', apple: 'Pazzaz', letter: 'A', flavor: 3.84, crunch: 2.44, aroma: 3.37, juiciness: 4.31, overall: 3.55 },
+        { grader: 'Yuval', apple: 'Honeycrisp', letter: 'B', flavor: 3.37, crunch: 2.44, aroma: 2.44, juiciness: 2.44, overall: 2.75 },
+        { grader: 'Yuval', apple: 'Sugarbee', letter: 'C', flavor: 4.31, crunch: 5.00, aroma: 2.91, juiciness: 4.31, overall: 4.21 },
+        { grader: 'Yuval', apple: 'Cosmic Crisp', letter: 'D', flavor: 3.84, crunch: 1.50, aroma: 3.37, juiciness: 3.84, overall: 3.22 },
+        { grader: 'Yuval', apple: 'Fuji', letter: 'E', flavor: 2.44, crunch: 1.50, aroma: 2.44, juiciness: 3.84, overall: 2.58 },
+        { grader: 'Yuval', apple: 'Gala', letter: 'F', flavor: 2.44, crunch: 1.50, aroma: 2.44, juiciness: 2.44, overall: 2.21 },
+        { grader: 'Yuval', apple: 'Envy', letter: 'G', flavor: 2.44, crunch: 1.50, aroma: 1.50, juiciness: 2.44, overall: 2.01 },
+        { grader: 'Yuval', apple: 'Honeycrisp OG', letter: 'H', flavor: 3.37, crunch: 3.37, aroma: 4.31, juiciness: 4.31, overall: 3.76 },
+        { grader: 'Gal', apple: 'Pazzaz', letter: 'A', flavor: 3.44, crunch: 3.44, aroma: 2.00, juiciness: 3.96, overall: 3.30 },
+        { grader: 'Gal', apple: 'Honeycrisp', letter: 'B', flavor: 3.44, crunch: 3.44, aroma: 2.00, juiciness: 3.44, overall: 3.15 },
+        { grader: 'Gal', apple: 'Sugarbee', letter: 'C', flavor: 3.96, crunch: 4.44, aroma: 2.48, juiciness: 3.44, overall: 3.64 },
+        { grader: 'Gal', apple: 'Cosmic Crisp', letter: 'D', flavor: 3.44, crunch: 2.96, aroma: 2.00, juiciness: 4.44, overall: 3.29 },
+        { grader: 'Gal', apple: 'Fuji', letter: 'E', flavor: 3.44, crunch: 2.96, aroma: 2.48, juiciness: 4.44, overall: 3.38 },
+        { grader: 'Gal', apple: 'Gala', letter: 'F', flavor: 1.00, crunch: 1.48, aroma: 2.00, juiciness: 2.96, overall: 1.75 },
+        { grader: 'Gal', apple: 'Envy', letter: 'G', flavor: 2.96, crunch: 1.00, aroma: 2.00, juiciness: 2.00, overall: 2.06 },
+        { grader: 'Gal', apple: 'Honeycrisp OG', letter: 'H', flavor: 3.96, crunch: 3.44, aroma: 3.96, juiciness: 4.44, overall: 3.96 },
+    ];
+
+    const apples = ['Pazzaz', 'Honeycrisp', 'Sugarbee', 'Cosmic Crisp', 'Fuji', 'Gala', 'Envy', 'Honeycrisp OG'];
+    const graders = ['Adam', 'Yuval', 'Gal'];
+    const categories = ['flavor', 'crunch', 'aroma', 'juiciness'];
+
+    // -----------------------------
+    // Computations (same logic)
+    // -----------------------------
+    const calcWeighted = (row) => row.flavor * 0.35 + row.crunch * 0.25 + row.aroma * 0.15 + row.juiciness * 0.25;
+
+    const getAppleAverages = () => {
+        return apples.map(apple => {
+            const appleData = normalizedData.filter(d => d.apple === apple);
+            const avg = (key) => appleData.reduce((sum, d) => sum + d[key], 0) / appleData.length;
+            const weightedOverall = avg('flavor') * 0.35 + avg('crunch') * 0.25 + avg('aroma') * 0.15 + avg('juiciness') * 0.25;
+            return {
+                apple,
+                letter: appleData[0].letter,
+                flavor: avg('flavor'),
+                crunch: avg('crunch'),
+                aroma: avg('aroma'),
+                juiciness: avg('juiciness'),
+                overall: weightedOverall,
+            };
+        }).sort((a, b) => b.overall - a.overall);
+    };
+
+    const getCategoryWinners = () => {
+        return categories.map(cat => {
+            const avgs = apples.map(apple => {
+                const appleData = normalizedData.filter(d => d.apple === apple);
+                return {
+                    apple,
+                    avg: appleData.reduce((sum, d) => sum + d[cat], 0) / appleData.length
+                };
+            });
+            const winner = avgs.sort((a, b) => b.avg - a.avg)[0];
+            return { category: cat, winner: winner.apple, score: winner.avg };
+        });
+    };
+
+    const getMedal = (rank) => {
+        if (rank === 0) return '🥇';
+        if (rank === 1) return '🥈';
+        if (rank === 2) return '🥉';
+        return `#${rank + 1}`;
+    };
+
+    const getRatingClass = (rating) => {
+        if (rating >= 90) return 'rate-90';
+        if (rating >= 80) return 'rate-80';
+        if (rating >= 70) return 'rate-70';
+        if (rating >= 60) return 'rate-60';
+        return 'rate-0';
+    };
+
+    // For CSS class name escaping (spaces)
+    const appleClass = (name) => 'a-' + name.replaceAll(' ', '\\ ');
+
+    // -----------------------------
+    // Render
+    // -----------------------------
+    const state = { selectedApple: null };
+
+    const iconForCategory = (cat) => {
+        if (cat === 'flavor') return '👅';
+        if (cat === 'crunch') return '🥬';
+        if (cat === 'aroma') return '👃';
+        if (cat === 'juiciness') return '💧';
+        return '⭐';
+    };
+
+    function render() {
+        const averages = getAppleAverages();
+        const categoryWinners = getCategoryWinners();
+        const winner = averages[0];
+
+        const app = document.getElementById('app');
+        app.innerHTML = `
+        <!-- Header -->
+        <div class="text-center mb-6">
+          <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">🍎 Blind Apple Tasting Results 🍏</h1>
+          <p class="text-gray-600">8 varieties • 3 judges • 4 categories</p>
+          <div class="mt-2 inline-block pill blue">✨ Normalized scores to account for grader bias</div>
+        </div>
+
+        <!-- Winner Announcement -->
+        <div class="winner-shell mb-6">
+          <div class="bg-white rounded-xl p-4 md:p-6 text-center">
+            <div class="text-5xl md:text-6xl mb-2">🏆</div>
+            <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-1">The Winner</h2>
+            <div class="text-3xl md:text-4xl font-bold" style="color: var(--amber-600); margin-bottom: 8px;">${escapeHtml(winner.apple)}</div>
+            <div class="text-lg md:text-xl text-gray-600">
+              Normalized Score: <span class="font-bold" style="color: var(--amber-600);">${winner.overall.toFixed(2)}</span> / 5
+            </div>
+            <p class="text-sm text-gray-500 mt-2" style="max-width: 520px; margin-left:auto; margin-right:auto;">
+              ${escapeHtml(appleFacts[winner.apple]?.knownFor ?? '')}
+            </p>
+          </div>
+        </div>
+
+        <!-- Grader Bias Info -->
+        <div class="bg-white rounded-xl shadow-md p-4 mb-6">
+          <h3 class="font-bold text-gray-700 mb-2 flex items-center gap-2">
+            <span>📊</span> Why Normalize?
+          </h3>
+          <p class="text-sm text-gray-600 mb-3">
+            Each grader had different scoring tendencies. We normalized so a "4" from a harsh grader equals a "4" from a generous one.
+          </p>
+          <div class="grid grid-cols-3 gap-2 text-center text-sm">
+            <div class="rounded-lg p-2" style="background: var(--emerald-50);">
+              <div class="font-bold" style="color: var(--green-700);">Adam</div>
+              <div class="text-gray-600">Most generous</div>
+              <div class="text-xs text-gray-500">avg: 3.31</div>
+            </div>
+            <div class="rounded-lg p-2" style="background: var(--yellow-50);">
+              <div class="font-bold" style="color: var(--amber-800);">Gal</div>
+              <div class="text-gray-600">Middle</div>
+              <div class="text-xs text-gray-500">avg: 3.06</div>
+            </div>
+            <div class="rounded-lg p-2" style="background: var(--red-50);">
+              <div class="font-bold" style="color: var(--red-700);">Yuval</div>
+              <div class="text-gray-600">Harshest</div>
+              <div class="text-xs text-gray-500">avg: 2.61</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Overall Rankings -->
+        <div class="bg-white rounded-2xl shadow-lg p-4 md:p-6 mb-6">
+          <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">📊 Overall Rankings (Normalized)</h2>
+          <div class="space-y-3">
+            ${averages.map((a, idx) => rankingRowHtml(a, idx, state.selectedApple === a.apple)).join('')}
+          </div>
+          <p class="text-xs text-gray-500 mt-3 text-center">Click any apple to learn more about it!</p>
+        </div>
+
+        <!-- Industry vs Your Ratings -->
+        <div class="bg-white rounded-2xl shadow-lg p-4 md:p-6 mb-6">
+          <h2 class="text-xl font-bold text-gray-800 mb-4">🍎 Your Ratings vs. Industry (applerankings.com)</h2>
+          <p class="text-sm text-gray-500 mb-4">
+            Brian Frange, "The Appleist" (featured on NPR), ranks over 70 apple varieties. Here's how your picks compare:
+          </p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b-2">
+                  <th class="text-left py-2 px-2">Apple</th>
+                  <th class="text-center py-2 px-2">Your Rank</th>
+                  <th class="text-center py-2 px-2">Your Score</th>
+                  <th class="text-center py-2 px-2">Industry Score</th>
+                  <th class="text-left py-2 px-2">Industry Nickname</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${averages.map((a, idx) => {
+            const r = appleFacts[a.apple]?.industryRating;
+            return `
+                    <tr class="border-b">
+                      <td class="py-2 px-2 font-medium">${escapeHtml(a.apple)}</td>
+                      <td class="text-center py-2 px-2">${escapeHtml(getMedal(idx))}</td>
+                      <td class="text-center py-2 px-2">${a.overall.toFixed(2)}</td>
+                      <td class="text-center py-2 px-2">
+                        <span class="pill ${getRatingClass(r ?? 0)}">${r ?? ''}</span>
+                      </td>
+                      <td class="py-2 px-2 text-gray-500 text-xs italic">"${escapeHtml(appleFacts[a.apple]?.industryNickname ?? '')}"</td>
+                    </tr>
+                  `;
+        }).join('')}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-4 p-3 rounded-lg text-sm" style="background: var(--amber-50);">
+            <div class="font-bold mb-1" style="color: var(--amber-800);">🤔 Notable Disagreements</div>
+            <ul class="text-gray-600 space-y-1">
+              <li>• <strong>Envy</strong>: Industry loves it (86/100 "Excellent"), you ranked it #7</li>
+              <li>• <strong>Gala</strong>: Industry's #1 seller (17% market share), you ranked it dead last</li>
+              <li>• <strong>Pazzaz</strong>: You ranked it #3, industry says "Barely Worth It" (60/100)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Category Winners -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+          ${categoryWinners.map(({category, winner, score}) => `
+            <div class="bg-white rounded-xl shadow-lg p-3 md:p-4 text-center">
+              <div class="text-2xl md:text-3xl mb-1">${iconForCategory(category)}</div>
+              <div class="text-xs text-gray-500 uppercase tracking-wide mb-1">Best ${escapeHtml(category)}</div>
+              <div class="font-bold text-gray-800 text-sm">${escapeHtml(winner)}</div>
+              <div class="text-xs text-gray-600">${score.toFixed(2)}</div>
+            </div>
+          `).join('')}
+        </div>
+
+        <!-- Detailed Breakdown -->
+        <div class="bg-white rounded-2xl shadow-lg p-4 md:p-6 mb-6 overflow-x-auto">
+          <h2 class="text-xl font-bold text-gray-800 mb-4">📋 Detailed Scores by Apple</h2>
+          <div class="text-xs text-gray-500 mb-3">Weights: Flavor 35% | Crunch 25% | Juiciness 25% | Aroma 15%</div>
+          <table class="w-full text-sm min-w-500">
+            <thead>
+              <tr class="border-b-2">
+                <th class="text-left py-3 px-2">Apple</th>
+                <th class="text-center py-3 px-2">👅 Flavor<br/><span class="text-xs text-gray-400">35%</span></th>
+                <th class="text-center py-3 px-2">🥬 Crunch<br/><span class="text-xs text-gray-400">25%</span></th>
+                <th class="text-center py-3 px-2">👃 Aroma<br/><span class="text-xs text-gray-400">15%</span></th>
+                <th class="text-center py-3 px-2">💧 Juicy<br/><span class="text-xs text-gray-400">25%</span></th>
+                <th class="text-center py-3 px-2 font-bold">Overall</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${averages.map((a, idx) => `
+                <tr class="border-b" style="${idx===0 ? 'background: var(--amber-50);' : ''}">
+                  <td class="py-3 px-2">
+                    <span class="font-medium">${escapeHtml(a.apple)}</span>
+                    <span class="text-gray-400 ml-1">(${escapeHtml(a.letter)})</span>
+                  </td>
+                  <td class="text-center py-3 px-2">${a.flavor.toFixed(2)}</td>
+                  <td class="text-center py-3 px-2">${a.crunch.toFixed(2)}</td>
+                  <td class="text-center py-3 px-2">${a.aroma.toFixed(2)}</td>
+                  <td class="text-center py-3 px-2">${a.juiciness.toFixed(2)}</td>
+                  <td class="text-center py-3 px-2 font-bold">${a.overall.toFixed(2)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Individual Grader Scores -->
+        <div class="bg-white rounded-2xl shadow-lg p-4 md:p-6 mb-6">
+          <h2 class="text-xl font-bold text-gray-800 mb-4">👥 Individual Grader Rankings</h2>
+          <div class="grid md:grid-cols-3 gap-4">
+            ${graders.map(grader => graderCardHtml(grader)).join('')}
+          </div>
+        </div>
+
+        <!-- Fun Facts -->
+        <div class="insights rounded-2xl p-4 md:p-6 mb-6">
+          <h2 class="text-xl font-bold mb-4">🎉 Tasting Insights</h2>
+          <div class="grid md:grid-cols-2 gap-3">
+            <div class="glass p-4">
+              <div class="font-bold mb-1">🔄 Normalization Flip</div>
+              <div class="text-sm" style="opacity:.92;">Before normalizing, Sugarbee won. After accounting for grader bias, Honeycrisp OG (Organic) edged ahead!</div>
+            </div>
+            <div class="glass p-4">
+              <div class="font-bold mb-1">🆚 You vs. The Experts</div>
+              <div class="text-sm" style="opacity:.92;">You disagree most with industry on Envy (they love it) and Gala (America's #1 seller, your last place).</div>
+            </div>
+            <div class="glass p-4">
+              <div class="font-bold mb-1">🤝 Unanimous Agreement</div>
+              <div class="text-sm" style="opacity:.92;">All three of you ranked Gala dead last. The industry gives it 70/100 — maybe shelf life matters more to them!</div>
+            </div>
+            <div class="glass p-4">
+              <div class="font-bold mb-1">👑 Crunch Royalty</div>
+              <div class="text-sm" style="opacity:.92;">Sugarbee dominated crunch — nicknamed "The Honey Grenade" by applerankings.com for a reason!</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Apple Family Tree -->
+        <div class="bg-white rounded-2xl shadow-lg p-4 md:p-6 mb-6">
+          <h2 class="text-xl font-bold text-gray-800 mb-4">🌳 The Honeycrisp Family Tree</h2>
+          <p class="text-sm text-gray-600 mb-4">Honeycrisp revolutionized the industry (scored 95/100). Most premium apples today are its descendants.</p>
+
+          <div class="flex flex-wrap justify-center gap-2 text-sm">
+            <div class="rounded-lg text-center px-3 py-2" style="background: var(--amber-100);">
+              <div class="font-bold">Honeycrisp</div>
+              <div class="text-xs text-gray-500">The Revolutionary (1991)</div>
+              <div class="text-xs font-bold" style="color: var(--green-600);">95/100</div>
+            </div>
+            <div class="text-2xl" style="align-self:center;">→</div>
+            <div class="flex" style="flex-direction:column; gap:8px;">
+              <div class="rounded-lg text-center px-3 py-2" style="background: var(--yellow-100);">
+                <div class="font-bold">Sugarbee</div>
+                <div class="text-xs text-gray-500">HC × Unknown</div>
+                <div class="text-xs font-bold" style="color: var(--green-600);">80/100</div>
+              </div>
+              <div class="rounded-lg text-center px-3 py-2" style="background: #ffe4e6;">
+                <div class="font-bold">Pazzaz</div>
+                <div class="text-xs text-gray-500">HC descendant</div>
+                <div class="text-xs font-bold" style="color: var(--orange-600);">60/100</div>
+              </div>
+              <div class="rounded-lg text-center px-3 py-2" style="background: #ede9fe;">
+                <div class="font-bold">Cosmic Crisp</div>
+                <div class="text-xs text-gray-500">HC × Enterprise</div>
+                <div class="text-xs font-bold" style="color: var(--green-600);">81/100</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-xs text-gray-500 mt-4 text-center">Gala, Envy, and Fuji come from separate lineages (New Zealand & Japan)</p>
+        </div>
+
+        <!-- US Market Share -->
+        <div class="bg-white rounded-2xl shadow-lg p-4 md:p-6 mb-6">
+          <h2 class="text-xl font-bold text-gray-800 mb-4">📊 US Apple Market Share (2024)</h2>
+          <div class="space-y-2">
+            ${[
+            { name: 'Gala', share: 17, inTest: true },
+            { name: 'Red Delicious', share: 12.3, inTest: false },
+            { name: 'Granny Smith', share: 10, inTest: false },
+            { name: 'Honeycrisp', share: 9.8, inTest: true },
+            { name: 'Fuji', share: 9.4, inTest: true },
+            { name: 'Cosmic Crisp', share: 6, inTest: true },
+        ].map(a => `
+              <div class="flex items-center gap-2">
+                <div class="w-28 text-sm font-medium">
+                  ${escapeHtml(a.name)}${a.inTest ? '<span class="ml-1 text-xs" style="color: var(--green-600);">✓</span>' : ''}
+                </div>
+                <div class="flex-1 market-track">
+                  <div class="market-bar" style="width:${(a.share/17)*100}%; background:${a.inTest ? '#3b82f6' : '#9ca3af'};"></div>
+                </div>
+                <div class="w-12 text-right text-sm">${a.share}%</div>
+              </div>
+            `).join('')}
+          </div>
+          <p class="text-xs text-gray-500 mt-3">✓ = in your tasting. Gala is #1 despite being your last place pick!</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-gray-500 text-sm">
+          <p>Blind Apple Tasting • January 2026</p>
+          <p class="text-xs mt-1">Adam, Yuval & Gal</p>
+          <p class="text-xs mt-2 text-gray-400">Industry ratings from applerankings.com by Brian Frange</p>
+        </div>
+      `;
+
+        // After render: set ranking bar widths
+        document.querySelectorAll('[data-bar]').forEach(el => {
+            const w = Number(el.getAttribute('data-bar'));
+            el.style.width = w + '%';
+        });
+    }
+
+    function rankingRowHtml(a, idx, expanded) {
+        const facts = appleFacts[a.apple] || {};
+        const rating = facts.industryRating ?? 0;
+        const ratingPill = facts.industryRating ? `
+        <span class="pill ${getRatingClass(rating)}">🍎 ${rating}/100</span>
+      ` : '';
+
+        const marketShareHtml = facts.marketShare ? `
+        <div>
+          <span class="text-gray-500">US Market Share:</span>
+          <span class="ml-2 font-bold" style="color:#2563eb;">${escapeHtml(facts.marketShare)}</span>
+        </div>
+      ` : '';
+
+        // Industry stat text color (approx. from JSX)
+        const statColor =
+            rating >= 80 ? 'color: var(--green-600);' :
+                rating >= 60 ? 'color: var(--yellow-500);' :
+                    'color: var(--red-600);';
+
+        const expandedHtml = expanded ? `
+        <div class="px-4 pb-4 pt-2 border-t" style="border-color: var(--border);">
+          <div class="grid md:grid-cols-2 gap-3 text-sm">
+            <div>
+              <div class="font-semibold text-gray-700">🌱 Origin</div>
+              <div class="text-gray-600">${escapeHtml(facts.origin ?? '')} (${escapeHtml(facts.year ?? '')})</div>
+            </div>
+            <div>
+              <div class="font-semibold text-gray-700">👨‍👩‍👧 Parents</div>
+              <div class="text-gray-600">${escapeHtml(facts.parents ?? '')}</div>
+            </div>
+            <div class="md:col-span-2">
+              <div class="font-semibold text-gray-700">⭐ Known For</div>
+              <div class="text-gray-600">${escapeHtml(facts.knownFor ?? '')}</div>
+            </div>
+            <div class="md:col-span-2">
+              <div class="font-semibold text-gray-700">🎉 Fun Fact</div>
+              <div class="text-gray-600">${escapeHtml(facts.funFact ?? '')}</div>
+            </div>
+            <div class="md:col-span-2 rounded-lg p-3" style="background: var(--gray-100);">
+              <div class="font-semibold text-gray-700 mb-2">📈 Industry Stats</div>
+              <div class="flex flex-wrap gap-4 text-sm">
+                <div>
+                  <span class="text-gray-500">Apple Rankings Score:</span>
+                  <span class="ml-2 font-bold" style="${statColor}">${facts.industryRating ?? ''}/100</span>
+                  <span class="text-gray-400 ml-1">(${escapeHtml(facts.industryTier ?? '')})</span>
+                </div>
+                ${marketShareHtml}
+              </div>
+              <div class="text-xs text-gray-500 mt-1 italic">"${escapeHtml(facts.industryNickname ?? '')}"</div>
+            </div>
+          </div>
+        </div>
+      ` : '';
+
+        const cardClass = appleClass(a.apple);
+
+        return `
+        <div class="row apple-card border-2 rounded-xl overflow-hidden ${cardClass}" data-apple="${escapeAttr(a.apple)}" style="background: var(--bg); border-color: var(--border);">
+          <div class="flex items-center gap-3 p-3">
+            <div class="text-2xl w-10 text-center" style="flex-shrink:0;">${escapeHtml(getMedal(idx))}</div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="font-bold text-gray-800">${escapeHtml(a.apple)}</span>
+                <span class="text-sm text-gray-500">(${escapeHtml(a.letter)})</span>
+                <span class="pill gray">${escapeHtml(facts.origin ?? '')}</span>
+                ${ratingPill}
+              </div>
+              <div class="bar-track mt-1">
+                <div class="bar" data-bar="${(a.overall/5)*100}"></div>
+              </div>
+            </div>
+            <div class="text-xl font-bold text-gray-700 w-14" style="text-align:right; flex-shrink:0;">
+              ${a.overall.toFixed(2)}
+            </div>
+          </div>
+          ${expandedHtml}
+        </div>
+      `;
+    }
+
+    function graderCardHtml(grader) {
+        const graderData = normalizedData
+            .filter(d => d.grader === grader)
+            .map(d => ({ ...d, weighted: calcWeighted(d) }))
+            .sort((a, b) => b.weighted - a.weighted);
+        const favorite = graderData[0];
+
+        return `
+        <div class="border rounded-xl p-4">
+          <h3 class="font-bold text-lg text-gray-800 mb-3 text-center">${escapeHtml(grader)}</h3>
+          <div class="text-center mb-3 p-2 rounded-lg" style="background: var(--amber-50);">
+            <span class="text-sm text-gray-500">Top Pick:</span>
+            <div class="font-bold" style="color: var(--amber-600);">${escapeHtml(favorite.apple)}</div>
+          </div>
+          <div class="space-y-2">
+            ${graderData.map((d, i) => `
+              <div class="flex justify-between items-center text-sm">
+                <span class="${i===0 ? 'font-medium' : 'text-gray-600'}">${i+1}. ${escapeHtml(d.apple)}</span>
+                <span class="font-mono ${i===0 ? 'font-bold' : ''}">${d.weighted.toFixed(2)}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // -----------------------------
+    // Events (delegated)
+    // -----------------------------
+    document.addEventListener('click', (e) => {
+        const row = e.target.closest('[data-apple]');
+        if (!row) return;
+        const apple = row.getAttribute('data-apple');
+        state.selectedApple = (state.selectedApple === apple) ? null : apple;
+        render();
+        // keep scroll position stable-ish: ensure clicked row remains visible
+        row.scrollIntoView({ block: 'nearest' });
+    });
+
+    // -----------------------------
+    // Small helpers
+    // -----------------------------
+    function escapeHtml(str) {
+        return String(str).replace(/[&<>"']/g, (m) => ({
+            '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+        }[m]));
+    }
+    function escapeAttr(str){ return escapeHtml(str).replace(/"/g, '&quot;'); }
+
+    // Initial render
+    render();
+</script>
+</body>
+</html>
+
