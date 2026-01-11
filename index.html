@@ -289,49 +289,35 @@
             industryTier: 'Excellent',
             industryNickname: 'The Guilty Pleasure',
             marketShare: null
-        },
-        'Honeycrisp OG': {
-            origin: 'Minnesota, USA',
-            year: '1991',
-            parents: 'Keepsake × MN1627',
-            knownFor: 'Organic Honeycrisp — same legendary variety, grown without synthetic pesticides or fertilizers.',
-            funFact: 'Organic apples often have more antioxidants. The "OG" stands for Organic, your control sample to compare against conventional apples.',
-            industryRating: 95,
-            industryTier: 'Nearly Perfect',
-            industryNickname: 'The Worldwide Favorite (Organic)',
-            marketShare: '9.8%'
         }
     };
 
     // Normalized data (z-score normalized per grader, rescaled)
     const normalizedData = [
         { grader: 'Adam', apple: 'Pazzaz', letter: 'A', flavor: 3.69, crunch: 3.19, aroma: 3.19, juiciness: 4.18, overall: 3.56 },
-        { grader: 'Adam', apple: 'Honeycrisp', letter: 'B', flavor: 2.70, crunch: 2.70, aroma: 3.19, juiciness: 3.19, overall: 2.91 },
         { grader: 'Adam', apple: 'Sugarbee', letter: 'C', flavor: 3.19, crunch: 4.68, aroma: 3.19, juiciness: 3.19, overall: 3.52 },
         { grader: 'Adam', apple: 'Cosmic Crisp', letter: 'D', flavor: 3.69, crunch: 3.69, aroma: 2.70, juiciness: 4.18, overall: 3.59 },
         { grader: 'Adam', apple: 'Fuji', letter: 'E', flavor: 3.19, crunch: 2.70, aroma: 3.69, juiciness: 3.69, overall: 3.28 },
         { grader: 'Adam', apple: 'Gala', letter: 'F', flavor: 1.00, crunch: 1.21, aroma: 2.70, juiciness: 2.21, overall: 1.67 },
         { grader: 'Adam', apple: 'Envy', letter: 'G', flavor: 1.72, crunch: 1.00, aroma: 1.72, juiciness: 1.72, overall: 1.55 },
-        { grader: 'Adam', apple: 'Honeycrisp OG', letter: 'H', flavor: 3.69, crunch: 3.69, aroma: 4.18, juiciness: 4.18, overall: 3.91 },
+        { grader: 'Adam', apple: 'Honeycrisp', letter: 'H', flavor: 3.69, crunch: 3.69, aroma: 4.18, juiciness: 4.18, overall: 3.91 },
         { grader: 'Yuval', apple: 'Pazzaz', letter: 'A', flavor: 3.84, crunch: 2.44, aroma: 3.37, juiciness: 4.31, overall: 3.55 },
-        { grader: 'Yuval', apple: 'Honeycrisp', letter: 'B', flavor: 3.37, crunch: 2.44, aroma: 2.44, juiciness: 2.44, overall: 2.75 },
         { grader: 'Yuval', apple: 'Sugarbee', letter: 'C', flavor: 4.31, crunch: 5.00, aroma: 2.91, juiciness: 4.31, overall: 4.21 },
         { grader: 'Yuval', apple: 'Cosmic Crisp', letter: 'D', flavor: 3.84, crunch: 1.50, aroma: 3.37, juiciness: 3.84, overall: 3.22 },
         { grader: 'Yuval', apple: 'Fuji', letter: 'E', flavor: 2.44, crunch: 1.50, aroma: 2.44, juiciness: 3.84, overall: 2.58 },
         { grader: 'Yuval', apple: 'Gala', letter: 'F', flavor: 2.44, crunch: 1.50, aroma: 2.44, juiciness: 2.44, overall: 2.21 },
         { grader: 'Yuval', apple: 'Envy', letter: 'G', flavor: 2.44, crunch: 1.50, aroma: 1.50, juiciness: 2.44, overall: 2.01 },
-        { grader: 'Yuval', apple: 'Honeycrisp OG', letter: 'H', flavor: 3.37, crunch: 3.37, aroma: 4.31, juiciness: 4.31, overall: 3.76 },
+        { grader: 'Yuval', apple: 'Honeycrisp', letter: 'H', flavor: 3.37, crunch: 3.37, aroma: 4.31, juiciness: 4.31, overall: 3.76 },
         { grader: 'Gal', apple: 'Pazzaz', letter: 'A', flavor: 3.44, crunch: 3.44, aroma: 2.00, juiciness: 3.96, overall: 3.30 },
-        { grader: 'Gal', apple: 'Honeycrisp', letter: 'B', flavor: 3.44, crunch: 3.44, aroma: 2.00, juiciness: 3.44, overall: 3.15 },
         { grader: 'Gal', apple: 'Sugarbee', letter: 'C', flavor: 3.96, crunch: 4.44, aroma: 2.48, juiciness: 3.44, overall: 3.64 },
         { grader: 'Gal', apple: 'Cosmic Crisp', letter: 'D', flavor: 3.44, crunch: 2.96, aroma: 2.00, juiciness: 4.44, overall: 3.29 },
         { grader: 'Gal', apple: 'Fuji', letter: 'E', flavor: 3.44, crunch: 2.96, aroma: 2.48, juiciness: 4.44, overall: 3.38 },
         { grader: 'Gal', apple: 'Gala', letter: 'F', flavor: 1.00, crunch: 1.48, aroma: 2.00, juiciness: 2.96, overall: 1.75 },
         { grader: 'Gal', apple: 'Envy', letter: 'G', flavor: 2.96, crunch: 1.00, aroma: 2.00, juiciness: 2.00, overall: 2.06 },
-        { grader: 'Gal', apple: 'Honeycrisp OG', letter: 'H', flavor: 3.96, crunch: 3.44, aroma: 3.96, juiciness: 4.44, overall: 3.96 },
+        { grader: 'Gal', apple: 'Honeycrisp', letter: 'H', flavor: 3.96, crunch: 3.44, aroma: 3.96, juiciness: 4.44, overall: 3.96 },
     ];
 
-    const apples = ['Pazzaz', 'Honeycrisp', 'Sugarbee', 'Cosmic Crisp', 'Fuji', 'Gala', 'Envy', 'Honeycrisp OG'];
+    const apples = ['Pazzaz', 'Sugarbee', 'Cosmic Crisp', 'Fuji', 'Gala', 'Envy', 'Honeycrisp'];
     const graders = ['Adam', 'Yuval', 'Gal'];
     const categories = ['flavor', 'crunch', 'aroma', 'juiciness'];
 
